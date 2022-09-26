@@ -22,7 +22,7 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
 
     ~~~    
     <master-node-ip> master-node
-    <worker-node-ip> node1 worker-node`
+    <worker-node-ip> node1 worker-node
     ~~~
     
 
