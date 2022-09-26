@@ -14,6 +14,6 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
 
     `   sudo hostnamectl set-hostname master-node`
     
-8.	Set hostname for worker-node on worker node instance
+7.	Set hostname for worker-node on worker node instance
     
     `   sudo hostnamectl set-hostname worker-node`
