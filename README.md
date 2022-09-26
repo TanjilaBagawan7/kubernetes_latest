@@ -54,5 +54,7 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
     ~~~
 
 12.	Execute below query for system configuration to take effect
-    `   sudo sysctl --system`
     
+    `   sudo sysctl --system`
+        
+##  Installing Pre-requisites Software’s and Configurations
