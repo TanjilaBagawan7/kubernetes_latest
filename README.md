@@ -31,3 +31,15 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
     sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
     sudo reboot
     ~~~  
+
+10.	Disable SWAP in all Instance
+    ~~~
+    sudo sed -i '/swap/d' /etc/fstab
+    sudo swapoff -a
+    ~~~
+11.	Update system settings for Kubernetes networking
+    ~~~
+    cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+    overlay
+    br_netfilter
+    ~~~
