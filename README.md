@@ -2,5 +2,8 @@
 Follow the below steps to install kubernetes cluster using Containerd as runtime environment
 
 ## VM requirements
-Master node - 2 cpu x 2 GB memory
-Worker node - 1 cpu x 2 GB memory
+1.	Create Master and Worker node instances based on the cluster requirements
+2.	Minimum machine configuration would be 2 Core and 2 GB for all the instances
+3.	Full network connectivity between all machines in the cluster (public or private network is fine)
+4.	Unique hostname, MAC address, and product_uuid for every node
+5.	Update repository packages in all the instances
