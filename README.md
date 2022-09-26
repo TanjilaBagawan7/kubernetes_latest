@@ -75,8 +75,10 @@ Follow the below steps to configure your Master and Worker node instances. All t
     ~~~
     
 3.	If you intend to start containerd via system, then need to execute below command
-
-`   curl https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -o /usr/lib/systemd/system/containerd.service`
+    
+    ~~~
+    curl https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -o /usr/lib/systemd/system/containerd.service`
+    ~~~
 
 4.	Enable containerd to start on boot and start containerd in all Instance
 
