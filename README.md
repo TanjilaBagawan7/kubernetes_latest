@@ -58,3 +58,42 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
     `   sudo sysctl --system`
         
 ##  Installing Pre-requisites Software’s and Configurations
+
+Follow the below steps to configure your Master and Worker node instances. All the below steps need to be executed for all the Master and Worker node instances. 
+
+1.	Download latest container runtime release binary from the below link
+
+    `   https://github.com/containerd/containerd/releases`
+   
+2.	Execute below command to setup containerd
+
+    ~~~
+    yum install -y wget
+    cd /opt
+    wget https://github.com/containerd/containerd/releases/download/v1.6.5/containerd-1.6.5-linux-amd64.tar.gz
+    tar Cxzvf /usr/local /opt/containerd-1.6.5-linux-amd64.tar.gz
+    ~~~
+    
+3.	If you intend to start containerd via system, then need to execute below command
+
+`   curl https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -o /usr/lib/systemd/system/containerd.service`
+
+4.	Enable containerd to start on boot and start containerd in all Instance
+
+    ~~~
+    systemctl daemon-reload
+    systemctl enable --now containerd
+    systemctl status containerd
+    ~~~
+
+5.	Download runc binary from the below link
+
+    `   https://github.com/opencontainers/runc/releases`
+
+6.	Install runc package using below command
+
+    ~~~
+    wget https://github.com/opencontainers/runc/releases/download/v1.1.2/runc.amd64
+    install -m 755 runc.amd64 /usr/local/sbin/runc
+    ~~~
+    
