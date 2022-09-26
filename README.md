@@ -8,4 +8,4 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
 4.	Unique hostname, MAC address, and product_uuid for every node
 5.	Update repository packages in all the instances
 
-`   sudo yum update`
+    `   sudo yum update`
