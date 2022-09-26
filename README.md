@@ -11,7 +11,9 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
     `   sudo yum update`
     
 6.	Set hostname for master-node on master node instance.
+
     `   sudo hostnamectl set-hostname master-node`
     
 8.	Set hostname for worker-node on worker node instance
-     `   sudo hostnamectl set-hostname worker-node`
+    
+    `   sudo hostnamectl set-hostname worker-node`
