@@ -17,3 +17,9 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
 7.	Set hostname for worker-node on worker node instance
     
     `   sudo hostnamectl set-hostname worker-node`
+
+8.	Update the /etc/hosts file in all instances
+    
+    `   <master-node-ip> master-node
+        <worker-node-ip> node1 worker-node`
+
