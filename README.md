@@ -52,3 +52,7 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
     net.ipv4.ip_forward = 1
     EOF
     ~~~
+
+12.	Execute below query for system configuration to take effect
+    `   sudo sysctl --system`
+    
