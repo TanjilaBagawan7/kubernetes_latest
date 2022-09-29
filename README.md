@@ -223,3 +223,24 @@ Follow below steps to start Kubernetes cluster
     ~~~
    
    
+##  Worker Node Configuration
+
+1.	Create below directory in all the worker node instances
+
+    ~~~
+    mkdir -p /etc/kubernetes/manifests
+    ~~~
+    
+2.	Copy the join command provided in the output of step 1 of Master Node configuration the command looks as below and execute the command from worker node as root user.
+    ~~~
+    kubeadm join 30.0.0.53:6443 --token kfpasj.lnjj98ndjf7bk3rl \
+        --discovery-token-ca-cert-hash sha256:3f74dbc4a9d589c78a9a6ae9d132d54655b429cbbf57210804540d1431953fc
+    ~~~
+    
+3.	Label your worker node using below command
+
+    ~~~
+    kubectl label node worker-node node-role.kubernetes.io/worker=worker
+    kubectl get nodes --show-labels
+    ~~~
+    
