@@ -195,3 +195,31 @@ Follow the below steps to configure your Master and Worker node instances. All t
     systemctl enable --now kubelet
     systemctl status kubelet
     ~~~
+
+##  Master Node Configuration
+
+Follow below steps to start Kubernetes cluster
+
+1.	Initialize Kubernetes cluster using below command
+
+    ~~~
+    kubeadm init
+    ~~~
+    
+2.	Once the cluster is created configure kubectl with below command.
+
+    ~~~
+    mkdir -p $HOME/.kube
+    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    export KUBECONFIG=/etc/kubernetes/admin.conf
+    ~~~
+    
+3.	Setup pod network using below commands
+
+    ~~~
+    curl https://docs.projectcalico.org/manifests/calico-typha.yaml -o calico.yaml
+    kubectl apply -f calico.yaml
+    ~~~
+   
+   
