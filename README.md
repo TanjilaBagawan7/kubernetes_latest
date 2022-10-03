@@ -1,30 +1,34 @@
 # Kubernetes Latest Version Setup (1.24)
 Follow the below steps to install kubernetes cluster using Containerd as runtime environment in Centos 7 Operating System
 
-## VM requirements
+## VM Specifications
 1.	Create Master and Worker node VMs based on the cluster requirements
 2.	Minimum machine configuration would be 2 Core and 2 GB for all the instances
 3.	Full network connectivity between all machines in the cluster (public or private network is fine)
 4.	Unique hostname, MAC address, and product_uuid for every node
-5.	Update repository packages in all the instances
+
+## Preparing the hosts
+
+1.	Update repository packages in all the instances
 
     `   sudo yum update`
     
-6.	Set hostname for master-node on master node instance.
+2.	Set hostname for master-node on master node instance.
 
     `   sudo hostnamectl set-hostname master-node`
     
-7.	Set hostname for worker-node on worker node instance
+3.	Set hostname for worker-node on worker node instance
     
     `   sudo hostnamectl set-hostname worker-node`
     
-8.	Update the /etc/hosts file in all instances
+4.	Update the /etc/hosts file in all instances
 
     ~~~    
     <master-node-ip> master-node
     <worker-node-ip> node1 worker-node
     ~~~
-9.	Disable SELinux in all the instances and reboot machines.
+    
+5.	Disable SELinux in all the instances and reboot machines.
 
     ~~~
     sudo setenforce 0
@@ -32,12 +36,13 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
     sudo reboot
     ~~~  
 
-10.	Disable SWAP in all Instances
+6.	Disable SWAP in all Instances
     ~~~
     sudo sed -i '/swap/d' /etc/fstab
     sudo swapoff -a
     ~~~
-11.	Update system settings for Kubernetes networking
+    
+7.	Update system settings for Kubernetes networking
     ~~~
     cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
     overlay
@@ -53,11 +58,12 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
     EOF
     ~~~
 
-12.	Execute below query for system configuration to take effect
+8.	Execute below query for system configuration to take effect
     
     `   sudo sysctl --system`
+    
         
-##  Installing Pre-requisites Software’s and Configurations
+##  Installing a container runtime environment
 
 Follow the below steps to configure your Master and Worker node instances. All the below steps need to be executed for all the Master and Worker node instances. 
 
@@ -132,7 +138,7 @@ Follow the below steps to configure your Master and Worker node instances. All t
     SystemdCgroup = true
     ~~~
 
-12.	Install below conntrack package
+12.	Install below conntrack dependency package
 
     ~~~
     yum install conntrack
@@ -144,7 +150,11 @@ Follow the below steps to configure your Master and Worker node instances. All t
     sudo systemctl restart containerd
     ~~~
     
-14.	Install kubeadm, kubelet and kubectl using below commands
+## Installing kubeadm, kubelet and kubectl
+
+Follow the below steps to install below packages in all of your cluster instances.
+
+1.	Install kubeadm, kubelet and kubectl using below commands
 
     ~~~
     DOWNLOAD_DIR=/usr/local/bin
@@ -155,16 +165,15 @@ Follow the below steps to configure your Master and Worker node instances. All t
     sudo chmod +x {kubeadm,kubelet,kubectl}
     ~~~
     
-15.	Create symbolic link to use kubeadm, kubelet and kubectl
+2.	Create symbolic link to use kubeadm, kubelet and kubectl
 
     ~~~
     ln -s /usr/local/bin/kubeadm /bin/kubeadm
     ln -s /usr/local/bin/kubelet /bin/kubelet
     ln -s /usr/local/bin/kubectl /bin/kubectl
-    ln -s /usr/local/bin/ctr /bin/ctr
     ~~~
     
-16.	Create kubelet service file using below commands    
+3.	Create kubelet service file using below commands    
 
     ~~~
     RELEASE_VERSION="v0.4.0"
@@ -173,7 +182,7 @@ Follow the below steps to configure your Master and Worker node instances. All t
     curl -sSL "https://raw.githubusercontent.com/kubernetes/release/${RELEASE_VERSION}/cmd/kubepkg/templates/latest/deb/kubeadm/10-kubeadm.conf" | sed "s:/usr/bin:${DOWNLOAD_DIR}:g" | sudo tee /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
     ~~~
 
-17.	Install CRICTL using below commands
+4.	Install CRICTL using below commands
 
     ~~~
     CRICTL_VERSION="v1.22.0"
@@ -181,15 +190,16 @@ Follow the below steps to configure your Master and Worker node instances. All t
     curl -L "https://github.com/kubernetes-sigs/cri-tools/releases/download/${CRICTL_VERSION}/crictl-${CRICTL_VERSION}-linux-${ARCH}.tar.gz" | sudo tar -C $DOWNLOAD_DIR -xz
     ~~~
     
-18.	Set below permissions for CRICTL 
+5.	Set below permissions for CRICTL 
     
     ~~~
     cd /usr/local/bin/
     chown root:root crictl
     ln -s /usr/local/bin/crictl /bin/crictl
+    ln -s /usr/local/bin/ctr /bin/ctr
     ~~~
 
-19.	Enable and start kubelet service
+6.	Enable and start kubelet service
 
     ~~~
     systemctl enable --now kubelet
@@ -198,7 +208,7 @@ Follow the below steps to configure your Master and Worker node instances. All t
 
 ##  Master Node Configuration
 
-Follow below steps to start Kubernetes cluster
+Follow below steps to start Kubernetes cluster inside master node instance
 
 1.	Initialize Kubernetes cluster using below command
 
