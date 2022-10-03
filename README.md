@@ -1,5 +1,5 @@
 # Kubernetes Latest Version Setup (1.24)
-Follow the below steps to install kubernetes cluster using Containerd as runtime environment in Centos 7
+Follow the below steps to install kubernetes cluster using Containerd as runtime environment in Centos 7 Operating System
 
 ## VM requirements
 1.	Create Master and Worker node VMs based on the cluster requirements
