@@ -251,6 +251,10 @@ Follow below steps to start Kubernetes cluster inside master node instance
 
     ~~~
     kubectl label node worker-node node-role.kubernetes.io/worker=worker
-    kubectl get nodes --show-labels
     ~~~
     
+4. Get status of your worker node instances using below command.
+
+    ~~~
+    kubectl get nodes --show-labels
+    ~~~
