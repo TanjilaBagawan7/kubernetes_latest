@@ -24,7 +24,7 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
     <master-node-ip> master-node
     <worker-node-ip> node1 worker-node
     ~~~
-9.	Disable SELinux in all the instance and reboot.
+9.	Disable SELinux in all the instances and reboot machines.
 
     ~~~
     sudo setenforce 0
@@ -32,7 +32,7 @@ Follow the below steps to install kubernetes cluster using Containerd as runtime
     sudo reboot
     ~~~  
 
-10.	Disable SWAP in all Instance
+10.	Disable SWAP in all Instances
     ~~~
     sudo sed -i '/swap/d' /etc/fstab
     sudo swapoff -a
